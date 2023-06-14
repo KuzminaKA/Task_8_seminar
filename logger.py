@@ -63,12 +63,32 @@ def put_data():
         number_journal -= 1
         # Можно добавить проверку, чтобы человек не выходил за пределы записей
         print(f'Изменить данную запись\n{data_first[number_journal]}')
-        name = name_data()
-        surname = surname_data()
-        phone = phone_data()
-        address = address_data()
-        data_first = data_first[:number_journal] + [f'{name}\n{surname}\n{phone}\n{address}\n'] + \
-                     data_first[number_journal + 1:]
+        
+        temp=data_first[number_journal].split()
+        choice=int(input("Введите пункт: 1 - имя 2 - фамилия 3 - телефон 4 - город"))
+
+        if choice ==1:
+            data_first = data_first[:number_journal] + [f'{name_data()}\n{temp[1]}\n{temp[2]}\n{temp[3]}\n'] + \
+                         data_first[number_journal + 1:]
+        elif choice==2:
+            data_first = data_first[:number_journal] + [
+                f'{temp[0]}\n{surname_data()}\n{temp[2]}\n{temp[3]}\n'] + \
+                         data_first[number_journal + 1:]
+        elif choice == 3:
+
+            data_first = data_first[:number_journal] + [
+                f'{temp[0]}\n{temp[1]}\n{temp[2]}\n{phone_data()}\n'] + \
+                         data_first[number_journal + 1:]
+        elif choice == 4:
+            data_first = data_first[:number_journal] + [
+                f'{temp[0]}\n{temp[1]}\n{temp[2]}\n{address_data()}\n'] + \
+                         data_first[number_journal + 1:]
+        elif choice == 5:
+            data_first = data_first[:number_journal] + [
+                f'{name_data()}\n{surname_data()}\n{phone_data()}\n{address_data()}\n'] + \
+                         data_first[number_journal + 1:]
+
+        
         with open('data_first_variant.csv', 'w', encoding='utf-8') as file:
             file.write(''.join(data_first))
         print('Изменения успешно сохранены!')
@@ -78,12 +98,32 @@ def put_data():
         number_journal -= 1
         # Можно добавить проверку, чтобы человек не выходил за пределы записи
         print(f'Изменить данную запись\n{data_second[number_journal]}')
-        name = name_data()
-        surname = surname_data()
-        phone = phone_data()
-        address = address_data()
-        data_second = data_second[:number_journal] + [f'{name};{surname};{phone};{address}\n'] + \
+        
+        temp=data_second[number_journal].split(';')
+        choice=int(input("Введите пункт: 1 - имя 2 - фамилия 3 - телефон 4 - город"))
+
+        if choice == 1:
+
+            data_second = data_second[:number_journal] + [
+                f'{name_data()};{temp[1]};{temp[2]};{temp[3]}\n'] + \
+                          data_second[number_journal + 1:]
+        elif choice == 2:
+            data_second = data_second[:number_journal] + [
+                f'{temp[0]};{surname_data()};{temp[2]};{temp[3]}\n'] + \
+                          data_second[number_journal + 1:]
+        elif choice == 3:
+
+            data_second = data_second[:number_journal] + [
+                f'{temp[0]};{temp[1]};{phone_data()};{temp[3]}\n'] + \
+                          data_second[number_journal + 1:]
+        elif choice == 4:
+            data_second = data_second[:number_journal] + [f'{temp[0]};{temp[1]};{temp[2]};{address_data()}\n'] + \
                       data_second[number_journal + 1:]
+        elif choice == 5:
+            data_second = data_second[:number_journal] + [f'{name_data()};{surname_data()};{phone_data()};{address_data()}\n'] + \
+                      data_second[number_journal + 1:]
+
+
         with open('data_second_variant.csv', 'w', encoding='utf-8') as file:
             file.write(''.join(data_second))
         print('Изменения успешно сохранены!')  # Можно вывести конечные данные
